@@ -1,0 +1,19 @@
+Source: linux-uki-helpers-@arch@-signed
+Section: admin
+Priority: optional
+Maintainer: Debian EFI team <debian-efi@lists.debian.org>
+Rules-Requires-Root: no
+Standards-Version: 4.3.0
+Build-Depends: debhelper,
+ sbsigntool [amd64 arm64],
+ linux-uki-unsigned (= @version_binary@),
+
+Package: linux-uki-helpers-@arch@-signed
+Architecture: @arch@
+Depends: linux-uki-unsigned (>= @version_binary@), ${misc:Depends},
+Built-Using: linux-uki (= @version_binary@)
+Description: Signed Unified Kernel Images for Secure Boot (signed by Debian)
+ This package provides pre-signed Unified Kernel Images that have been
+ authenticated by the Debian UEFI CA for use with UEFI Secure Boot.
+ These UKIs combine kernel, initramfs, and boot parameters into a single
+ securely bootable UEFI executable.

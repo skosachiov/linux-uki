@@ -1,0 +1,4 @@
+/boot/efi/EFI/*/linux-uki*.efi /usr/lib/linux-uki
+/boot/efi/EFI/*/mm*.efi /usr/lib/linux-uki
+/boot/efi/EFI/*/fb*.efi /usr/lib/linux-uki
+/boot/efi/EFI/*/BOOT*.CSV /usr/lib/linux-uki
