@@ -16,7 +16,7 @@ override_dh_auto_configure:
 		dch --no-auto-nmu --force-bad-version -v "$(KERNEL_VERSION)-1" "Build for kernel $(KERNEL_VERSION)" --distribution unstable; \
 	fi
 	# Replace template variables
-	sed 's/@KERNEL_VERSION@/$(KERNEL_VERSION)/g' debian/signing-template.json.in > debian/signing-template.json
+	sed 's/@KERNEL_VERSION@/$(KERNEL_VERSION)/g' debian/signing-template.json.in > $(DESTDIR)/usr/lib/linux-uki/files.json
 
 override_dh_auto_build:
 	$(MAKE) KERNEL_VERSION=$(KERNEL_VERSION)
@@ -27,3 +27,12 @@ override_dh_auto_install:
 override_dh_auto_clean:
 	$(MAKE) clean
 	rm -f debian/changelog.dch
+	rm -f debian/.debhelper/
+	rm -f debian/debhelper-build-stamp
+	rm -f debian/files
+	rm -f debian/linux-uki-helpers-amd64-signed-template.substvars
+	rm -f debian/linux-uki-helpers-amd64-signed-template/
+	rm -f debian/linux-uki-unsigned.substvars
+	rm -f debian/linux-uki-unsigned/
+	rm -f debian/signing-template.json
+
