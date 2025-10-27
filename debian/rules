@@ -13,7 +13,7 @@ override_dh_auto_configure:
 	@CURRENT=$$(dpkg-parsechangelog -S Version 2>/dev/null | cut -d- -f1); \
 	if [ "$$CURRENT" != "$(KERNEL_VERSION)" ]; then \
 		echo "Updating package version to $(KERNEL_VERSION)-1"; \
-		dch --force-bad-version -v "$(KERNEL_VERSION)-1" "Build for kernel $(KERNEL_VERSION)" --distribution unstable; \
+		dch --no-auto-nmu --force-bad-version -v "$(KERNEL_VERSION)-1" "Build for kernel $(KERNEL_VERSION)" --distribution unstable; \
 	fi
 
 override_dh_auto_build:
