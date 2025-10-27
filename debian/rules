@@ -7,20 +7,21 @@ KERNEL_VERSION := $(shell basename /boot/vmlinuz-* | sed 's/vmlinuz-//')
 
 override_dh_auto_configure:
 	@echo "Configuring for kernel build..."
+	# Clean up any existing backup files
+	rm -f debian/changelog.dch
 	# Update changelog version before build
-	@if [ "$(DEB_BUILD_ARCH)" != "" ]; then \
-		CURRENT=$$(dpkg-parsechangelog -S Version 2>/dev/null | cut -d- -f1); \
-		if [ "$$CURRENT" != "$(KERNEL_VERSION)" ]; then \
-			echo "Updating package version to $(KERNEL_VERSION)-1"; \
-			dch -v "$(KERNEL_VERSION)-1" "Build for kernel $(KERNEL_VERSION)" --distribution unstable; \
-		fi; \
+	@CURRENT=$$(dpkg-parsechangelog -S Version 2>/dev/null | cut -d- -f1); \
+	if [ "$$CURRENT" != "$(KERNEL_VERSION)" ]; then \
+		echo "Updating package version to $(KERNEL_VERSION)-1"; \
+		dch --force-bad-version -v "$(KERNEL_VERSION)-1" "Build for kernel $(KERNEL_VERSION)" --distribution unstable; \
 	fi
 
 override_dh_auto_build:
-	$(MAKE) debian-build
+	$(MAKE) KERNEL_VERSION=$(KERNEL_VERSION)
 
 override_dh_auto_install:
-	$(MAKE) DESTDIR=debian/linux-uki debian-install
+	$(MAKE) DESTDIR=debian/linux-uki KERNEL_VERSION=$(KERNEL_VERSION) install
 
 override_dh_auto_clean:
 	$(MAKE) clean
+	rm -f debian/changelog.dch
