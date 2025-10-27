@@ -1,0 +1,26 @@
+#!/usr/bin/make -f
+
+KERNEL_VERSION := $(shell basename /boot/vmlinuz-* | sed 's/vmlinuz-//')
+
+%:
+	dh $@
+
+override_dh_auto_configure:
+	@echo "Configuring for kernel build..."
+	# Update changelog version before build
+	@if [ "$(DEB_BUILD_ARCH)" != "" ]; then \
+		CURRENT=$$(dpkg-parsechangelog -S Version 2>/dev/null | cut -d- -f1); \
+		if [ "$$CURRENT" != "$(KERNEL_VERSION)" ]; then \
+			echo "Updating package version to $(KERNEL_VERSION)-1"; \
+			dch -v "$(KERNEL_VERSION)-1" "Build for kernel $(KERNEL_VERSION)" --distribution unstable; \
+		fi; \
+	fi
+
+override_dh_auto_build:
+	$(MAKE) debian-build
+
+override_dh_auto_install:
+	$(MAKE) DESTDIR=debian/linux-uki debian-install
+
+override_dh_auto_clean:
+	$(MAKE) clean
