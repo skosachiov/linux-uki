@@ -1,7 +1,7 @@
 all: run
 
-KERNEL_VERSION=$(basename /boot/vmlinuz-* | sed 's/vmlinuz-//')
 run:
+	KERNEL_VERSION=$(basename /boot/vmlinuz-* | sed 's/vmlinuz-//')
 	ukify build \
 		--linux=/boot/vmlinuz-${KERNEL_VERSION} \
 		--initrd=/boot/initrd.img-${KERNEL_VERSION} \
