@@ -1,11 +1,11 @@
 # Get kernel version
 KERNEL_VERSION := $(shell basename /boot/vmlinuz-* | sed 's/vmlinuz-//')
 
-.PHONY: all build clean install
+.PHONY: build clean install
 
-all: build
+build: linux-uki-$(KERNEL_VERSION).efi
 
-build:
+linux-uki-$(KERNEL_VERSION).efi:
 	@echo "Building UKI for kernel: $(KERNEL_VERSION)"
 	ukify build \
 		--linux=/boot/vmlinuz-$(KERNEL_VERSION) \
