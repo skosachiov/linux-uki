@@ -3,8 +3,7 @@
     "linux-uki-unsigned": {
       "trusted_certs": [],
       "files": [
-        {"sig_type": "efi", "file": "usr/lib/linux-uki/fb@efi@.efi"},
-        {"sig_type": "efi", "file": "usr/lib/linux-uki/mm@efi@.efi"}
+        {"sig_type": "efi", "file": "usr/lib/linux-uki/linux-uki-@KERNEL_VERSION@.efi"},
       ]
     }
   }

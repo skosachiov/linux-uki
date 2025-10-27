@@ -15,6 +15,8 @@ override_dh_auto_configure:
 		echo "Updating package version to $(KERNEL_VERSION)-1"; \
 		dch --no-auto-nmu --force-bad-version -v "$(KERNEL_VERSION)-1" "Build for kernel $(KERNEL_VERSION)" --distribution unstable; \
 	fi
+	# Replace template variables
+	sed -i 's/@KERNEL_VERSION@/$(KERNEL_VERSION)/g' debian/signing-template.json.in
 
 override_dh_auto_build:
 	$(MAKE) KERNEL_VERSION=$(KERNEL_VERSION)
