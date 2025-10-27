@@ -19,10 +19,10 @@ override_dh_auto_configure:
 	sed 's/@KERNEL_VERSION@/$(KERNEL_VERSION)/g' debian/signing-template.json.in > $(DESTDIR)/usr/lib/linux-uki/files.json
 
 override_dh_auto_build:
-	$(MAKE) KERNEL_VERSION=$(KERNEL_VERSION) build
+	$(MAKE) build KERNEL_VERSION=$(KERNEL_VERSION)
 
 override_dh_auto_install:
-	$(MAKE) DESTDIR=debian/linux-uki KERNEL_VERSION=$(KERNEL_VERSION) install
+	$(MAKE) install DESTDIR=debian/linux-uki KERNEL_VERSION=$(KERNEL_VERSION)
 
 override_dh_auto_clean:
 	$(MAKE) clean
