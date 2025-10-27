@@ -5,7 +5,7 @@ KERNEL_VERSION := $(shell basename /boot/vmlinuz-* | sed 's/vmlinuz-//')
 %:
 	dh $@
 
-override_dh_auto_build:
+override_dh_auto_configure:
 	@echo "Configuring for kernel build..."
 	# Clean up any existing backup files
 	rm -f debian/changelog.dch
@@ -17,6 +17,8 @@ override_dh_auto_build:
 	fi
 	# Replace template variables
 	sed 's/@KERNEL_VERSION@/$(KERNEL_VERSION)/g' debian/signing-template.json.in > $(DESTDIR)/usr/lib/linux-uki/files.json
+
+override_dh_auto_build:
 	$(MAKE) build KERNEL_VERSION=$(KERNEL_VERSION)
 
 override_dh_auto_install:
