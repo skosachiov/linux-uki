@@ -19,8 +19,3 @@ install:
 
 clean:
 	rm -f linux-uki-*.efi
-
-# Helper target for debian/rules
-debian-build: build
-
-debian-install: build install
