@@ -5,9 +5,7 @@ Maintainer: skosachiov <skosachiov@gmail.com>
 Uploaders: skosachiov <skosachiov@gmail.com>
 Rules-Requires-Root: no
 Standards-Version: 4.6.2
-Build-Depends: debhelper-compat,
-	       sbsigntool,
-	       openssl
+Build-Depends: debhelper-compat (= 13), sbsigntool, openssl
 
 Package: linux-uki-unsigned
 Architecture: amd64 arm64
