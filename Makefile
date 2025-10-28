@@ -1,6 +1,6 @@
 KERNEL_VERSION := $(shell basename /boot/vmlinuz-* | sed 's/vmlinuz-//')
 
-prefix = /usr/local
+prefix = /usr/share
 
 all: src/linux-uki-$(KERNEL_VERSION).efi
 
