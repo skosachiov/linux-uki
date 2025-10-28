@@ -25,6 +25,7 @@ subst () {
 		-e "s/@distribution@/${distribution}/g" \
 		-e "s/@urgency@/${urgency}/g" \
 		-e "s/@date@/${date}/g" \
+		-e "s/@kernel_version@/${KERNEL_VERSION}/g" \
 		"$@"
 }
 

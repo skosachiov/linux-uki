@@ -8,13 +8,15 @@ export DH_VERBOSE = 1
 #export DEB_CFLAGS_MAINT_APPEND  = -Wall -pedantic
 #export DEB_LDFLAGS_MAINT_APPEND = -Wl,-O1
 
+export KERNEL_VERSION = $(shell basename /boot/vmlinuz-* | sed 's/vmlinuz-//')
+
 ifeq ($(DEB_HOST_ARCH),amd64)
-	export SB_PACKAGE = linux-uki-amd64
+	export SB_PACKAGE = linux-uki
 	export SB_PLATFORM = x86_64-efi
 	export SB_EFI_NAME = x64
 endif
 ifeq ($(DEB_HOST_ARCH),arm64)
-	export SB_PACKAGE = linux-uki-arm64
+	export SB_PACKAGE = linux-uki
 	export SB_PLATFORM = arm64-efi
 	export SB_EFI_NAME = aa64
 endif

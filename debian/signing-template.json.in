@@ -4,7 +4,7 @@
         "@pkg_unsigned@": {
             "trusted_certs": [],
             "files": [
-                {"sig_type": "efi", "file": "usr/lib/linux-uki/@efi_platform@/monolithic/linux-uki@efi@.efi"}
+                {"sig_type": "efi", "file": "usr/lib/bin/linux-uki-@kernel_version@.efi"}
             ]
         }
     }
