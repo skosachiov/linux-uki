@@ -2,6 +2,8 @@
 
 KERNEL_VERSION := $(shell basename /boot/vmlinuz-* | sed 's/vmlinuz-//')
 
+export DH_VERBOSE = 1
+
 %:
 	dh $@
 
@@ -16,14 +18,14 @@ override_dh_auto_configure:
 	echo "Kernel version: $(KERNEL_VERSION)"; \
 	if [ "$$CURRENT_VERSION" != "$(KERNEL_VERSION)" ]; then \
 		echo "Updating package version to $(KERNEL_VERSION)-1"; \
-		dch --package linux-uki-unsigned --newversion "$(KERNEL_VERSION)-1" "Build for kernel $(KERNEL_VERSION)"; \
+		dch --package linux-uki --newversion "$(KERNEL_VERSION)-1" "Build for kernel $(KERNEL_VERSION)"; \
 	else \
 		echo "Version already matches kernel version"; \
 	fi
 
 	# Create output directory and generate files.json
-	install -d $(CURDIR)/debian/linux-uki-unsigned/usr/lib/linux-uki/
-	sed 's/@KERNEL_VERSION@/$(KERNEL_VERSION)/g' debian/signing-template.json.in > $(CURDIR)/debian/linux-uki-unsigned/usr/lib/linux-uku/files.json
+	install -d $(CURDIR)/debian/linux-uki/usr/lib/linux-uki/
+	sed 's/@KERNEL_VERSION@/$(KERNEL_VERSION)/g' debian/signing-template.json.in > $(CURDIR)/debian/linux-uki/usr/lib/linux-uku/files.json
 
 override_dh_auto_build:
 	$(MAKE) build KERNEL_VERSION=$(KERNEL_VERSION)
@@ -41,5 +43,6 @@ override_dh_auto_clean:
 	rm -fr debian/linux-uki-helpers-amd64-signed-template/
 	rm -f debian/linux-uki-unsigned.substvars
 	rm -fr debian/linux-uki-unsigned/
+	rm -fr debian/linux-uki/
 	rm -f debian/signing-template.json
 
