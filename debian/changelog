@@ -1,7 +1,6 @@
-linux-uki (0.0) UNRELEASED; urgency=medium
+linux-uki (0.0-1) UNRELEASED; urgency=low
 
-  * init
+  * Initial release. Closes: #nnnn
+    <nnnn is the bug number of your ITP>
 
- -- skosachiov <skosachiov@gmail.com>  Sun, 29 Aug 2025 21:31:59 +0100
-
-
+ -- skosachiov <skosachiov@localhost>  Tue, 28 Oct 2025 15:09:51 +0300

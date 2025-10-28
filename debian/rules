@@ -1,48 +1,15 @@
 #!/usr/bin/make -f
-
-KERNEL_VERSION := $(shell basename /boot/vmlinuz-* | sed 's/vmlinuz-//')
-
-export DH_VERBOSE = 1
+# You must remove unused comment lines for the released package.
+#export DH_VERBOSE = 1
+#export DEB_BUILD_MAINT_OPTIONS = hardening=+all
+#export DEB_CFLAGS_MAINT_APPEND  = -Wall -pedantic
+#export DEB_LDFLAGS_MAINT_APPEND = -Wl,-O1
 
 %:
 	dh $@
 
-override_dh_auto_configure:
-	@echo "Configuring for kernel build..."
-	# Clean up any existing backup files
-	rm -f debian/changelog.dch
+#override_dh_auto_install:
+#	dh_auto_install -- prefix=/usr
 
-	# Get current package version from changelog
-	@CURRENT_VERSION=$$(dpkg-parsechangelog -S Version 2>/dev/null | cut -d- -f1); \
-	echo "Current package version: $$CURRENT_VERSION"; \
-	echo "Kernel version: $(KERNEL_VERSION)"; \
-	if [ "$$CURRENT_VERSION" != "$(KERNEL_VERSION)" ]; then \
-		echo "Updating package version to $(KERNEL_VERSION)-1"; \
-		dch --package linux-uki --newversion "$(KERNEL_VERSION)-1" "Build for kernel $(KERNEL_VERSION)"; \
-	else \
-		echo "Version already matches kernel version"; \
-	fi
-
-	# Create output directory and generate files.json
-	install -d $(CURDIR)/debian/linux-uki/usr/lib/linux-uki/
-	sed 's/@KERNEL_VERSION@/$(KERNEL_VERSION)/g' debian/signing-template.json.in > $(CURDIR)/debian/linux-uki/usr/lib/linux-uki/files.json
-
-override_dh_auto_build:
-	$(MAKE) build KERNEL_VERSION=$(KERNEL_VERSION)
-
-override_dh_auto_install:
-	$(MAKE) install DESTDIR=debian/linux-uki KERNEL_VERSION=$(KERNEL_VERSION)
-
-override_dh_auto_clean:
-	$(MAKE) clean
-	rm -f debian/changelog.dch
-	rm -fr debian/.debhelper/
-	rm -f debian/debhelper-build-stamp
-	rm -f debian/files
-	rm -f debian/linux-uki-helpers-amd64-signed-template.substvars
-	rm -fr debian/linux-uki-helpers-amd64-signed-template/
-	rm -f debian/linux-uki-unsigned.substvars
-	rm -fr debian/linux-uki-unsigned/
-	rm -fr debian/linux-uki/
-	rm -f debian/signing-template.json
-
+#override_dh_install:
+#	dh_install --list-missing -X.pyc -X.pyo
