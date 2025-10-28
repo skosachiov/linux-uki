@@ -1,10 +1,10 @@
 {
   "packages": {
-    "shim-unsigned": {
+    "linux-uki-unsigned": {
       "trusted_certs": [],
       "files": [
-        {"sig_type": "efi", "file": "usr/lib/shim/fb@efi@.efi"},
-        {"sig_type": "efi", "file": "usr/lib/shim/mm@efi@.efi"}
+        {"sig_type": "efi", "file": "usr/lib/linux-uki/fb@efi@.efi"},
+        {"sig_type": "efi", "file": "usr/lib/linux-uki/mm@efi@.efi"}
       ]
     }
   }

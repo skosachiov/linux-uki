@@ -1,19 +1,19 @@
-Source: shim-helpers-@arch@-signed
+Source: linux-uki-helpers-@arch@-signed
 Section: admin
 Priority: optional
 Maintainer: Debian EFI team <debian-efi@lists.debian.org>
 Standards-Version: 4.3.0
 Build-Depends: debhelper (>= 10.1~),
  sbsigntool [amd64 arm64 i386],
- shim-unsigned (= @version_binary@),
+ linux-uki-unsigned (= @version_binary@),
 
-Package: shim-helpers-@arch@-signed
+Package: linux-uki-helpers-@arch@-signed
 Architecture: @arch@
-Conflicts: shim (<< 15+1533136590.3beb971-3~),
-Replaces: shim (<< 15+1533136590.3beb971-3~), shim-signed (<< 1.29),
-Breaks: shim-signed (<< 1.29),
-Depends: shim-unsigned (>= @version_binary@), ${misc:Depends},
-Built-Using: shim (= @version_binary@)
+Conflicts: linux-uki (<< 15+1533136590.3beb971-3~),
+Replaces: linux-uki (<< 15+1533136590.3beb971-3~), linux-uki-signed (<< 1.29),
+Breaks: linux-uki-signed (<< 1.29),
+Depends: linux-uki-unsigned (>= @version_binary@), ${misc:Depends},
+Built-Using: linux-uki (= @version_binary@)
 Description: boot loader to chain-load signed boot loaders (signed by Debian)
  This package provides a minimalist boot loader which allows verifying
  signatures of other UEFI binaries against either the Secure Boot DB/DBX or
@@ -22,4 +22,4 @@ Description: boot loader to chain-load signed boot loaders (signed by Debian)
  an OS distributor to revision their main bootloader independently of the CA.
  .
  This package contains the MOK manager and fall-back manager signed by the
- Debian UEFI CA to be used by shim-signed.
+ Debian UEFI CA to be used by linux-uki-signed.

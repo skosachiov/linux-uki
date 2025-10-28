@@ -1,6 +1,6 @@
 #!/usr/bin/make -f
 
-SIG_DIR := debian/signatures/shim-unsigned
+SIG_DIR := debian/signatures/linux-uki-unsigned
 
 %:
 	dh $@

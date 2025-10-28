@@ -6,7 +6,7 @@ urgency="$(dpkg-parsechangelog -S Urgency)"
 date="$(dpkg-parsechangelog -S Date)"
 version_binary="$(dpkg-parsechangelog -S Version)"
 version_mangled="$(dpkg-parsechangelog -S Version | tr '-' '+')"
-pkg_name="shim-helpers-${DEB_HOST_ARCH}-signed-template"
+pkg_name="linux-uki-helpers-${DEB_HOST_ARCH}-signed-template"
 final_pkg_name="${pkg_name%-template}"
 
 subst () {
