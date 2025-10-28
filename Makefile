@@ -1,7 +1,7 @@
 # Get kernel version
 KERNEL_VERSION := $(shell basename /boot/vmlinuz-* | sed 's/vmlinuz-//')
 
-.PHONY: build clean install
+all: build
 
 build: linux-uki-$(KERNEL_VERSION).efi
 
@@ -13,9 +13,16 @@ linux-uki-$(KERNEL_VERSION).efi:
 		--cmdline='quiet rw' \
 		--output=linux-uki-$(KERNEL_VERSION).efi
 
-install:
+install: all
 	install -d $(DESTDIR)/usr/lib/linux-uki/
 	install -m 644 linux-uki-$(KERNEL_VERSION).efi $(DESTDIR)/usr/lib/linux-uki/
 
 clean:
 	rm -f linux-uki-*.efi
+
+distclean: clean
+
+uninstall:
+	rm -f $(DESTDIR)/usr/lib/linux-uki/linux-uki-*.efi
+
+.PHONY: all build install clean distclean uninstall
