@@ -1,4 +1,7 @@
 #!/usr/bin/make -f
+
+package := linux-uki
+
 # You must remove unused comment lines for the released package.
 export DH_VERBOSE = 1
 #export DEB_BUILD_MAINT_OPTIONS = hardening=+all
@@ -15,4 +18,4 @@ export DH_VERBOSE = 1
 #	dh_install --list-missing -X.pyc -X.pyo
 
 override_dh_auto_install:
-	./debian/signing-template.generate
+	./debian/signing-template.generate "$(package)"
