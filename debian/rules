@@ -9,14 +9,14 @@ export DH_VERBOSE = 1
 #export DEB_LDFLAGS_MAINT_APPEND = -Wl,-O1
 
 ifeq ($(DEB_HOST_ARCH),amd64)
-SB_PACKAGE := linux-uki-amd64
-SB_PLATFORM := x86_64-efi
-SB_EFI_NAME := x64
+	export SB_PACKAGE = linux-uki-amd64
+	export SB_PLATFORM = x86_64-efi
+	export SB_EFI_NAME = x64
 endif
 ifeq ($(DEB_HOST_ARCH),arm64)
-SB_PACKAGE := linux-uki-arm64
-SB_PLATFORM := arm64-efi
-SB_EFI_NAME := aa64
+	export SB_PACKAGE = linux-uki-arm64
+	export SB_PLATFORM = arm64-efi
+	export SB_EFI_NAME = aa64
 endif
 
 %:
