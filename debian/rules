@@ -34,12 +34,12 @@ override_dh_auto_install:
 override_dh_auto_clean:
 	$(MAKE) clean
 	rm -f debian/changelog.dch
-	rm -f debian/.debhelper/
+	rm -fr debian/.debhelper/
 	rm -f debian/debhelper-build-stamp
 	rm -f debian/files
 	rm -f debian/linux-uki-helpers-amd64-signed-template.substvars
-	rm -f debian/linux-uki-helpers-amd64-signed-template/
+	rm -fr debian/linux-uki-helpers-amd64-signed-template/
 	rm -f debian/linux-uki-unsigned.substvars
-	rm -f debian/linux-uki-unsigned/
+	rm -fr debian/linux-uki-unsigned/
 	rm -f debian/signing-template.json
 
