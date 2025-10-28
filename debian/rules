@@ -9,14 +9,21 @@ override_dh_auto_configure:
 	@echo "Configuring for kernel build..."
 	# Clean up any existing backup files
 	rm -f debian/changelog.dch
-	# Update changelog version before build
-	@CURRENT=$$(dpkg-parsechangelog -S Version 2>/dev/null | cut -d- -f1); \
-	if [ "$$CURRENT" != "$(KERNEL_VERSION)" ]; then \
+
+	# Get current package version from changelog
+	@CURRENT_VERSION=$$(dpkg-parsechangelog -S Version 2>/dev/null | cut -d- -f1); \
+	echo "Current package version: $$CURRENT_VERSION"; \
+	echo "Kernel version: $(KERNEL_VERSION)"; \
+	if [ "$$CURRENT_VERSION" != "$(KERNEL_VERSION)" ]; then \
 		echo "Updating package version to $(KERNEL_VERSION)-1"; \
-		dch --no-auto-nmu --force-bad-version -v "$(KERNEL_VERSION)-1" "Build for kernel $(KERNEL_VERSION)" --distribution unstable; \
+		dch --package linux-uki-unsigned --newversion "$(KERNEL_VERSION)-1" "Build for kernel $(KERNEL_VERSION)"; \
+	else \
+		echo "Version already matches kernel version"; \
 	fi
-	# Replace template variables
-	sed 's/@KERNEL_VERSION@/$(KERNEL_VERSION)/g' debian/signing-template.json.in > $(DESTDIR)/usr/lib/linux-uki/files.json
+
+	# Create output directory and generate files.json
+	install -d $(CURDIR)/debian/linux-uki-unsigned/usr/lib/linux-uki/
+	sed 's/@KERNEL_VERSION@/$(KERNEL_VERSION)/g' debian/signing-template.json.in > $(CURDIR)/debian/linux-uki-unsigned/usr/lib/linux-uku/files.json
 
 override_dh_auto_build:
 	$(MAKE) build KERNEL_VERSION=$(KERNEL_VERSION)
