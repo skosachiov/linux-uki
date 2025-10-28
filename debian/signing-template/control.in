@@ -1,25 +1,15 @@
-Source: linux-uki-helpers-@arch@-signed
+Source: @pkg_signed@
 Section: admin
 Priority: optional
-Maintainer: Debian EFI team <debian-efi@lists.debian.org>
-Standards-Version: 4.3.0
+Maintainer: linux-uki Maintainers <pkg-linux-uki-devel@alioth-lists.debian.net>
+Standards-Version: 3.9.8
 Build-Depends: debhelper (>= 10.1~),
  sbsigntool [amd64 arm64 i386],
- linux-uki-unsigned (= @version_binary@),
+ @pkg_unsigned@ (= @version_binary@),
+Rules-Requires-Root: no
 
-Package: linux-uki-helpers-@arch@-signed
+Package: @pkg_signed@
 Architecture: @arch@
-Conflicts: linux-uki (<< 15+1533136590.3beb971-3~),
-Replaces: linux-uki (<< 15+1533136590.3beb971-3~), linux-uki-signed (<< 1.29),
-Breaks: linux-uki-signed (<< 1.29),
-Depends: linux-uki-unsigned (>= @version_binary@), ${misc:Depends},
 Built-Using: linux-uki (= @version_binary@)
-Description: boot loader to chain-load signed boot loaders (signed by Debian)
- This package provides a minimalist boot loader which allows verifying
- signatures of other UEFI binaries against either the Secure Boot DB/DBX or
- against a built-in signature database.  Its purpose is to allow a small,
- infrequently-changing binary to be signed by the UEFI CA, while allowing
- an OS distributor to revision their main bootloader independently of the CA.
- .
- This package contains the MOK manager and fall-back manager signed by the
- Debian UEFI CA to be used by linux-uki-signed.
+Description: linux-uki
+Protected: yes

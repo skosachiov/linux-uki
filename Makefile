@@ -4,8 +4,8 @@ prefix = /usr/lib
 
 all: src/linux-uki-$(KERNEL_VERSION).efi
 
-src/linux-uki-$(KERNEL_VERSION).efi: src/build-linux-uki.sh
-	./$^
+src/linux-uki-$(KERNEL_VERSION).efi: src/linux-uki.sh
+	./src/linux-uki.sh
 
 install: src/linux-uki-$(KERNEL_VERSION).efi
 	install -D src/linux-uki-$(KERNEL_VERSION).efi \

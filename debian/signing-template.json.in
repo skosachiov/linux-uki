@@ -1,11 +1,11 @@
 {
-  "packages": {
-    "linux-uki-unsigned": {
-      "trusted_certs": [],
-      "files": [
-        {"sig_type": "efi", "file": "usr/lib/linux-uki/fb@efi@.efi"},
-        {"sig_type": "efi", "file": "usr/lib/linux-uki/mm@efi@.efi"}
-      ]
+    "version": "2",
+    "packages": {
+        "@pkg_unsigned@": {
+            "trusted_certs": [],
+            "files": [
+                {"sig_type": "efi", "file": "usr/lib/linux-uki/@efi_platform@/monolithic/linux-uki@efi@.efi"}
+            ]
+        }
     }
-  }
 }
