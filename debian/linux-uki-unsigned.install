@@ -1,1 +1,1 @@
-/boot/efi/EFI/*/linux-uki*.efi /usr/lib/linux-uki
+/usr/share/linux-uki/linux-uki*.efi
