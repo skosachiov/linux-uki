@@ -2,7 +2,7 @@ Source: linux-uki
 Section: unknown
 Priority: optional
 Maintainer: skosachiov <skosachiov@localhost>
-Build-Depends: debhelper-compat (= 13),
+Build-Depends: debhelper-compat (= 13), linux-headers-amd64, systemd-ukify
 Standards-Version: 4.7.0
 Homepage: <insert the upstream URL, if relevant>
 Rules-Requires-Root: no
@@ -12,7 +12,7 @@ Rules-Requires-Root: no
 Package: linux-uki-unsigned
 Architecture: any
 Multi-Arch: foreign
-Depends: ${misc:Depends}, ${shlibs:Depends}, linux-headers-amd64, systemd-ukify
+Depends: ${misc:Depends}, ${shlibs:Depends}
 Description: Unsigned Unified Kernel Images for Linux
  This package provides unsigned Unified Kernel Images (UKI) that combine
  the kernel, initramfs, and boot parameters into a single EFI executable.
@@ -37,4 +37,3 @@ Description: Template for signed Unified Kernel Images
  This package is intended for system administrators and organizations
  that need to deploy securely bootable Linux images across their
  infrastructure.
- 
