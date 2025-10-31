@@ -31,7 +31,7 @@ endif
 #	dh_install --list-missing -X.pyc -X.pyo
 
 override_dh_auto_configure:
-	dch -v "$(KERNEL_VERSION)" "Rebuild for kernel $(KERNEL_VERSION)"
+	yes | dch -v "$(KERNEL_VERSION)" "Rebuild for kernel $(KERNEL_VERSION)"
 	dh_auto_configure
 
 override_dh_auto_install:

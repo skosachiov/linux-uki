@@ -2,7 +2,7 @@ Source: linux-uki
 Section: unknown
 Priority: optional
 Maintainer: skosachiov <skosachiov@localhost>
-Build-Depends: debhelper-compat (= 13), linux-headers-amd64, systemd-ukify
+Build-Depends: debhelper-compat (= 13), linux-headers-amd64, systemd-ukify, systemd-boot-efi
 Standards-Version: 4.7.0
 Homepage: <insert the upstream URL, if relevant>
 Rules-Requires-Root: no
