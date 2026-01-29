@@ -1,0 +1,16 @@
+Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: linux
+Upstream-Contact: Linux Kernel Mailing List <linux-kernel@vger.kernel.org>
+Source: https://www.kernel.org/
+
+# Note: This is a simplified copyright file for a UKI kernel package.
+# The actual Linux kernel has thousands of copyright holders.
+
+Files: *
+Copyright: 1991-2024 Linus Torvalds and thousands of contributors
+License: GPL-2.0-only
+
+Files: debian/*
+Copyright: 2024 Debian Kernel Team <debian-kernel@lists.debian.org>
+           2024 Your Name <your.email@example.com>
+License: GPL-2.0-only

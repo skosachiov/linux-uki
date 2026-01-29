@@ -1,0 +1,48 @@
+name: Build Debian Package
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        debian-version: [trixie]
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up Docker Build
+      uses: docker/setup-buildx-action@v3
+
+    - name: Build in Docker and preserve artifacts
+      run: |
+        mkdir -p artifacts
+
+    - name: Build Debian Package in Container
+      run: |
+        docker run \
+          --rm \
+          -v $(pwd):/workspace \
+          -v $(pwd)/artifacts:/artifacts \
+          -w /workspace \
+          -e PCR_PRIVATE_KEY_INITRD="${{ secrets.PCR_PRIVATE_KEY_INITRD }}" \
+          -e PCR_PUBLIC_KEY_INITRD="${{ secrets.PCR_PUBLIC_KEY_INITRD }}" \
+          debian:${{ matrix.debian-version }} \
+          sh -c "
+            apt-get update &&
+            apt-get install -y build-essential devscripts debhelper systemd-ukify linux-headers-amd64 python3-requests-file &&
+            dpkg-buildpackage -us -uc -b &&
+            cp ../*.deb ../*.changes ../*.buildinfo /artifacts/
+          "
+
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: deb-packages-${{ matrix.debian-version }}
+        path: artifacts/
+        if-no-files-found: warn

@@ -1,0 +1,15 @@
+Source: @pkg_signed@
+Section: admin
+Priority: optional
+Maintainer: linux-uki Maintainers <pkg-linux-uki-devel@alioth-lists.debian.net>
+Standards-Version: 3.9.8
+Build-Depends: debhelper (>= 10.1~),
+ sbsigntool [amd64 arm64 i386],
+ @pkg_unsigned@ (= @version_binary@),
+Rules-Requires-Root: no
+
+Package: @pkg_signed@
+Architecture: @arch@
+Built-Using: linux-uki (= @version_binary@)
+Description: linux-uki
+Protected: yes

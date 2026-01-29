@@ -1,0 +1,41 @@
+#!/usr/bin/make -f
+
+package := linux-uki
+
+KERNEL_VERSION=$(shell ls -1 /boot/vmlinuz-* | sort | tail -n1 | sed 's/\/boot\/vmlinuz-//')
+BUILD_DIR=build
+INSTALL_DIR=boot/efi/EFI/debian
+
+export DH_VERBOSE = 1
+
+ifeq ($(DEB_HOST_ARCH),amd64)
+	export SB_PACKAGE = linux-uki
+	export SB_PLATFORM = x86_64-efi
+	export SB_EFI_NAME = x64
+endif
+ifeq ($(DEB_HOST_ARCH),arm64)
+	export SB_PACKAGE = linux-uki
+	export SB_PLATFORM = arm64-efi
+	export SB_EFI_NAME = aa64
+endif
+
+%:
+	dh $@
+
+override_dh_auto_configure:
+	yes | dch -v "$(KERNEL_VERSION)" "Rebuild for kernel $(KERNEL_VERSION)"
+	mkdir -p $(BUILD_DIR)
+	cp -r src/* $(BUILD_DIR)/
+	dh_auto_configure
+
+override_dh_auto_build:
+	$(MAKE) -C $(BUILD_DIR)
+
+override_dh_install:
+	sed -i -e "s|@INSTALL_DIR@|$${INSTALL_DIR}|g" debian/linux-uki-unsigned.install
+	dh_install
+
+override_dh_auto_install:
+	mkdir -p debian/linux-uki/$(INSTALL_DIR)
+	cp $(BUILD_DIR)/linux-uki-*.efi debian/linux-uki/$(INSTALL_DIR)/
+	dh_auto_install

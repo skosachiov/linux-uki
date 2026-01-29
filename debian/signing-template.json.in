@@ -1,0 +1,10 @@
+{
+  "packages": {
+    "@pkg_unsigned@": {
+      "trusted_certs": [],
+      "files": [
+        {"sig_type": "efi", "file": "usr/lib/linux-uki/@pkg_unsigned@-@kernel_version@.efi"}
+      ]
+    }
+  }
+}
