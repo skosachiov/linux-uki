@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        debian-version: [trixie]
+        debian-version: [trixie, forky]
 
     steps:
     - uses: actions/checkout@v4
