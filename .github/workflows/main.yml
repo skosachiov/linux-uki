@@ -50,7 +50,7 @@ jobs:
   release:
     needs: build
     runs-on: ubuntu-latest
-    if: startsWith(github.ref, 'refs/tags/v')
+    if: startsWith(github.ref, 'refs/tags/')
 
     steps:
     - name: Download all artifacts
@@ -58,17 +58,11 @@ jobs:
       with:
         path: artifacts/
 
-    - name: Create Release and Upload Packages
+    - name: Create GitHub Release
       uses: softprops/action-gh-release@v1
       with:
         files: |
-          artifacts/**/*.deb
-          artifacts/**/*.changes
-          artifacts/**/*.buildinfo
-        tag_name: ${{ github.ref_name }}
-        name: Release ${{ github.ref_name }}
-        generate_release_notes: false
-        draft: false
-        prerelease: false
+          artifacts/*
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
