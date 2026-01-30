@@ -2,7 +2,7 @@
 
 package := linux-uki
 
-KERNEL_VERSION=$(shell ls -1 /boot/vmlinuz-* | sort | tail -n1 | sed 's/\/boot\/vmlinuz-//')
+export KERNEL_VERSION=$(shell ls -1 /boot/vmlinuz-* | sort | tail -n1 | sed 's/\/boot\/vmlinuz-//')
 BUILD_DIR=build
 INSTALL_DIR=boot/efi/EFI/debian
 
