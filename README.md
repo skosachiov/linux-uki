@@ -4,4 +4,8 @@
 
 This repository contains scripts and configuration for building Unified Kernel Images (UKI) for corporate Linux deployments, designed to integrate seamlessly into automated build pipelines. The UKI combines the kernel, initramfs, kernel command line, and UEFI stub into a single, signed EFI executable to meet stringent security requirements. A critical aspect of the build process is the secure handling of cryptographic keys for Measured Boot and integrity verification. To facilitate this, the build environment requires the provision of a private key for PCR (Platform Configuration Register) measurements and a corresponding public key for validation; these must be supplied as the environment variables `PCR_PRIVATE_KEY_INITRD` (containing the private key material) and `PCR_PUBLIC_KEY_INITRD` (containing the public key). The build system outputs two primary artifacts: an unsigned UKI package (`linux-uki-unsigned`) for environments where signing occurs in a separate, secured stage, and a template package (`linux-uki-signed-template`) structured according to standard Debian packaging conventions, which provides the necessary hooks and infrastructure for the final automated signing step using standard Debian tooling (debsign or equivalent) to produce the final, signed linux-uki-signed package ready for secure deployment.
 
-https://api.github.com/repos/skosachiov/linux-uki/actions/artifacts/5314415269/zip
+Y3VybCAtTCAtSCAiQXV0aG9yaXphdGlvbjogdG9rZW4gZ2l0aHViX3BhdF8xMUFCSTdRQUkwWjlJ
+T0N5MVJmTmZvX2lyOGszUlVORUE2U3hsbGlaZkplMmhDRlRRTmF5OWk2THdjRldjTlVWMzBEN1dG
+UEg2MzRWbnJmTzhWIiBcCmh0dHBzOi8vYXBpLmdpdGh1Yi5jb20vcmVwb3Mvc2tvc2FjaGlvdi9s
+aW51eC11a2kvYWN0aW9ucy9hcnRpZmFjdHMvNTMxNDQxNTI2OS96aXAgLW8gYXJ0aWZhY3Quemlw
+IAo=
